@@ -7,6 +7,13 @@ let menu = document.querySelector('#menu-bar');
 let navbar = document.querySelector('.navbar');
 let videoBtn = document.querySelectorAll('.vid-btn');
 
+
+let book_form = document.getElementById('book-form')
+let location_name = document.getElementById('location_name')
+let number_people = document.getElementById('number_people')
+let date_arrival = document.getElementById('date_arrival')
+let date_leaving = document.getElementById('date_leaving')
+
 window.onscroll = () =>{
     searchBtn.classList.remove('fa-times');
     searchBar.classList.remove('active');
@@ -41,6 +48,7 @@ videoBtn.forEach(btn =>{
         document.querySelector('#video-slider').src = src;
     });
 });
+
 
 var swiper = new Swiper(".review-slider", {
     spaceBetween: 20,
@@ -84,3 +92,41 @@ var swiper = new Swiper(".brand-slider", {
         },
       },
 });
+
+
+book_form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  if(location_name.value === "") {
+    addError(location_name, 'Location name cannot be empty!')
+  }else {
+    removeError(location_name, "")
+  }
+  if(number_people.value === "") {
+    addError(number_people, 'Number of persons cannot be empty!')
+  }else {
+    removeError(number_people, "")
+  }
+  if(date_arrival.value === "") {
+    addError(date_arrival, 'Please add your arrival date!')
+  }else {
+    removeError(date_arrival, "")
+  }
+  if(date_leaving.value === "") {
+    addError(date_leaving, 'Please add date of departure!')
+  }else {
+    removeError(date_leaving, "")
+  }
+
+  if(location_name.value && number_people.value && date_leaving.value && date_arrival.value !== "") {
+    alert('Booking Successful!')
+  }
+})
+
+function addError(field, message) {
+  let error = field.nextElementSibling
+  error.innerText = message
+}
+function removeError(field, message) {
+  let error = field.nextElementSibling
+  error.innerText = message
+}
